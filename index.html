@@ -1,0 +1,440 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FORGE — Built by You</title>
+  <meta name="description" content="FORGE is a fictional premium strength and performance club — a design and development concept. Built by you.">
+  <meta name="theme-color" content="#0A0A0A">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    /* Start-states (opacity only) exist only while .anim-pending is set, and it is ALWAYS
+       released — by js/animations.js, or by this 3 s failsafe if GSAP never arrives. */
+    (function () {
+      var h = document.documentElement;
+      h.classList.add('js', 'anim-pending');
+      var stored = null;
+      try { stored = localStorage.getItem('forge-motion'); } catch (e) {}
+      var sys = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var mode = stored || (sys ? 'reduced' : 'full');
+      h.dataset.motion = mode;
+      if (mode === 'full') h.classList.add('intro-on');
+      setTimeout(function () { if (!window.__forgeReady) h.classList.remove('anim-pending', 'intro-on'); }, 3000);
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- opening curtain (full motion only, ~1 s, never waits for assets, click to skip) -->
+  <div class="curtain" id="curtain" aria-hidden="true">
+    <div class="curtain__panel curtain__panel--top"></div>
+    <div class="curtain__panel curtain__panel--bottom"></div>
+    <div class="curtain__mark"><span>FORGE</span></div>
+    <i class="curtain__line"></i>
+  </div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- NAVIGATION -->
+  <header class="nav" id="nav">
+    <div class="nav__bar">
+      <a class="logo" href="#top" aria-label="FORGE — back to top">
+        <span class="logo__word">F<span class="logo__o" aria-hidden="true"></span><span class="sr">O</span>RGE</span>
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#philosophy" data-link>Philosophy</a>
+        <a href="#training" data-link>Training</a>
+        <a href="#membership" data-link>Membership</a>
+        <a href="#faq" data-link>FAQ</a>
+        <a href="#join" data-link>Inquire</a>
+      </nav>
+      <div class="nav__right">
+        <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="true"><span class="motion-toggle__dot" aria-hidden="true"></span><span data-motion-label>Motion on</span></button>
+        <a class="btn btn--sm btn--ember nav__cta" href="#membership" data-magnetic><span>Join FORGE</span><i class="btn__arrow" aria-hidden="true"></i></a>
+        <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- chapter index (desktop) -->
+  <nav class="chapters" aria-label="Page chapters">
+    <a href="#top" data-chapter="top"><span>01</span><em>Opening</em></a>
+    <a href="#philosophy" data-chapter="philosophy"><span>02</span><em>Philosophy</em></a>
+    <a href="#training" data-chapter="training"><span>03</span><em>Training</em></a>
+    <a href="#membership" data-chapter="membership"><span>04</span><em>Membership</em></a>
+    <a href="#campaign" data-chapter="campaign"><span>05</span><em>Campaign</em></a>
+    <a href="#join" data-chapter="join"><span>06</span><em>Join</em></a>
+  </nav>
+
+  <div class="menu" id="menu" hidden inert>
+    <nav class="menu__nav" aria-label="Mobile">
+      <a href="#philosophy"><span>01</span>Philosophy</a>
+      <a href="#training"><span>02</span>Training</a>
+      <a href="#membership"><span>03</span>Membership</a>
+      <a href="#faq"><span>04</span>FAQ</a>
+      <a href="#join"><span>05</span>Inquire</a>
+      <a href="#membership" class="menu__join"><span>→</span>Join FORGE</a>
+    </nav>
+    <div class="menu__foot">
+      <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="true"><span class="motion-toggle__dot" aria-hidden="true"></span><span data-motion-label>Motion on</span></button>
+      <p class="label">Fictional concept — not a real business</p>
+    </div>
+  </div>
+
+  <div class="toast" id="motion-toast" role="status" hidden>
+    <p>Reduced motion is on in your system settings, so FORGE is showing a calm version of its animation.</p>
+    <button class="btn btn--sm btn--ember" type="button" data-motion-enable><span>Play full motion</span><i class="btn__arrow" aria-hidden="true"></i></button>
+    <button class="toast__x label" type="button" data-toast-close>Dismiss</button>
+  </div>
+
+  <main id="main">
+
+    <!-- 01 OPENING -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero__media" data-hero-media>
+        <picture class="hero__pic">
+          <source media="(max-width: 700px)" srcset="assets/images/forge-hero-mobile.jpg">
+          <img class="hero__img" src="assets/images/forge-hero.jpg" data-fallback="assets/images/placeholders/forge-hero.svg" data-fallback-mobile="assets/images/placeholders/forge-hero-mobile.svg" alt="An athlete in profile at a loaded barbell in a dark industrial strength club, chalk hanging in the rim light." width="1536" height="1024" fetchpriority="high">
+        </picture>
+      </div>
+      <div class="hero__beam" aria-hidden="true"></div>
+      <p class="hero__wordmark" aria-hidden="true" data-depth="0.6">FORGE</p>
+      <div class="hero__shade" aria-hidden="true"></div>
+      <div class="hero__frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+      <div class="hero__meta" data-hero="fade">
+        <p class="label">Strength &amp; performance club</p>
+        <p class="label">Concept edition · Nº 001</p>
+      </div>
+
+      <div class="hero__body" data-hero-body>
+        <p class="hero__kicker label" data-hero="fade"><span class="dot"></span> Premium strength &amp; performance</p>
+        <h1 class="hero__title" id="hero-title">
+          <span class="line"><span class="line__in" data-hero="line">Built</span></span>
+          <span class="line"><span class="line__in" data-hero="line">by <em>you.</em></span></span>
+        </h1>
+        <div class="hero__foot">
+          <p class="hero__copy" data-hero="fade">Strength is not given. It is built — session by session, in a room designed for the work.</p>
+          <div class="hero__cta" data-hero="fade">
+            <a class="btn btn--bone btn--lg" href="#membership" data-magnetic><span>Explore membership</span><i class="btn__arrow" aria-hidden="true"></i></a>
+            <a class="textlink" href="#training"><span>See the training</span><i class="btn__arrow" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <a class="hero__scroll" href="#philosophy" data-hero="fade" aria-label="Scroll to the philosophy"><span class="label">Scroll</span><i aria-hidden="true"><b></b></i></a>
+    </section>
+
+    <!-- 02 PHILOSOPHY -->
+    <section class="phil" id="philosophy" aria-labelledby="phil-title">
+      <div class="wrap phil__grid">
+        <p class="label index phil__index"><span>02</span> / Philosophy</p>
+        <h2 class="phil__title" id="phil-title" data-words>You don’t find strength. You build it.</h2>
+
+        <figure class="phil__fig" data-reveal>
+          <img src="assets/images/forge-detail-hands.jpg" data-fallback="assets/images/placeholders/forge-detail-hands.svg" alt="Chalked hands gripping a knurled steel bar, chalk dust hanging in the light." width="1024" height="1536" loading="lazy">
+          <figcaption class="label">Grip · Steel · Chalk</figcaption>
+        </figure>
+
+        <div class="phil__text">
+          <p class="phil__lead" data-fade>A forge turns raw material into something with purpose — through heat, pressure and repetition. Nothing about it is quick, and nothing about it is accidental. We train the same way: a clear plan, honest numbers and a room that rewards showing up.</p>
+          <ol class="pillars">
+            <li data-fade><span class="pillars__n">01</span><div><h3>Strength</h3><p>Structured resistance training built on technique, progressive overload and measurable progress.</p></div></li>
+            <li data-fade><span class="pillars__n">02</span><div><h3>Discipline</h3><p>A consistent environment and clear standards that make long-term habits easier to keep.</p></div></li>
+            <li data-fade><span class="pillars__n">03</span><div><h3>Performance</h3><p>Strength, conditioning, movement quality and recovery developed together — not in isolation.</p></div></li>
+          </ol>
+        </div>
+      </div>
+      <div class="phil__band" aria-hidden="true"><div class="phil__band-track" data-band><span>No shortcuts</span><span>No empty promises</span><span>Just the work</span><span>No shortcuts</span><span>No empty promises</span><span>Just the work</span></div></div>
+    </section>
+
+    <!-- 03 TRAINING EXPERIENCE -->
+    <section class="training" id="training" aria-labelledby="training-title">
+      <div class="wrap">
+        <header class="training__head">
+          <p class="label index"><span>03</span> / The training experience</p>
+          <h2 class="h-xl" id="training-title">
+            <span class="line"><span class="line__in" data-line>One room.</span></span>
+            <span class="line"><span class="line__in" data-line>Built to <em>work</em> in.</span></span>
+          </h2>
+          <p class="training__lede" data-fade>Four ways to train under one roof. Choose a service to see what it includes, who it’s for and what it costs.</p>
+        </header>
+
+        <div class="xp" data-xp>
+          <div class="xp__list" role="tablist" aria-label="Training services">
+            <button class="xp__tab" role="tab" id="xp-t1" aria-controls="xp-p1" aria-selected="true" data-xp-tab="0"><span class="xp__n">01</span><span class="xp__name">Strength floor</span><span class="xp__tag">All plans</span></button>
+            <button class="xp__tab" role="tab" id="xp-t2" aria-controls="xp-p2" aria-selected="false" data-xp-tab="1"><span class="xp__n">02</span><span class="xp__name">Personal training</span><span class="xp__tag">Elite · à la carte</span></button>
+            <button class="xp__tab" role="tab" id="xp-t3" aria-controls="xp-p3" aria-selected="false" data-xp-tab="2"><span class="xp__n">03</span><span class="xp__name">Performance coaching</span><span class="xp__tag">Performance · Elite</span></button>
+            <button class="xp__tab" role="tab" id="xp-t4" aria-controls="xp-p4" aria-selected="false" data-xp-tab="3"><span class="xp__n">04</span><span class="xp__name">Recovery</span><span class="xp__tag">All plans</span></button>
+            <div class="xp__progress" aria-hidden="true"><i></i></div>
+          </div>
+
+          <div class="xp__stage">
+            <div class="xp__media" aria-hidden="true">
+              <img class="xp__img is-active" src="assets/images/forge-floor-wide.jpg" data-fallback="assets/images/placeholders/forge-floor-wide.svg" alt="" width="1536" height="1024" loading="lazy">
+              <img class="xp__img" src="assets/images/forge-coaching.jpg" data-fallback="assets/images/placeholders/forge-coaching.svg" alt="" width="1024" height="1536" loading="lazy">
+              <img class="xp__img" src="assets/images/forge-conditioning.jpg" data-fallback="assets/images/placeholders/forge-conditioning.svg" alt="" width="1536" height="1024" loading="lazy">
+              <img class="xp__img" src="assets/images/forge-recovery.jpg" data-fallback="assets/images/placeholders/forge-recovery.svg" alt="" width="1536" height="1024" loading="lazy">
+              <span class="xp__count label" aria-hidden="true"><b data-xp-count>01</b> / 04</span>
+            </div>
+
+            <div class="xp__panels">
+              <article class="xp__panel" role="tabpanel" id="xp-p1" aria-labelledby="xp-t1" tabindex="0">
+                <h3>The strength floor</h3>
+                <p class="xp__lead">Barbell-led, progressive and yours to run — the foundation of everything we do.</p>
+                <ul class="xp__list-items">
+                  <li>Proposed: 6 power racks, 2 lifting platforms, dumbbells to 120 lb</li>
+                  <li>Selectorised and plate-loaded machines, cable stations, turf lane</li>
+                  <li>Open during standard hours, no booking required</li>
+                </ul>
+                <p class="xp__meta">Included in every plan, from <strong data-price-from="access"></strong> / month. Starts with a 30-minute orientation.</p>
+                <a class="textlink" href="#membership"><span>Compare plans</span><i class="btn__arrow" aria-hidden="true"></i></a>
+              </article>
+              <article class="xp__panel" role="tabpanel" id="xp-p2" aria-labelledby="xp-t2" tabindex="0">
+                <h3>Personal training</h3>
+                <p class="xp__lead">One coach, one plan, one person. Programming and honest feedback built around your numbers.</p>
+                <ul class="xp__list-items">
+                  <li>60-minute one-to-one sessions with technique coaching</li>
+                  <li>Goal-setting, a written plan and regular progress reviews</li>
+                  <li>FORGE Elite includes 2 sessions every month</li>
+                </ul>
+                <p class="xp__meta"><strong data-extra-price="0"></strong> single · <strong data-extra-price="1"></strong> for 4 · <strong data-extra-price="2"></strong> for 8 · <strong data-extra-price="3"></strong> introductory assessment.</p>
+                <a class="textlink" href="#inquiry" data-plan-link="elite"><span>Enquire about coaching</span><i class="btn__arrow" aria-hidden="true"></i></a>
+              </article>
+              <article class="xp__panel" role="tabpanel" id="xp-p3" aria-labelledby="xp-t3" tabindex="0">
+                <h3>Performance coaching</h3>
+                <p class="xp__lead">Coached small-group conditioning for people who want to keep going when it gets hard.</p>
+                <ul class="xp__list-items">
+                  <li>4 coached group sessions per month, 45 minutes each</li>
+                  <li>Intervals, sled work, air bikes, rowers, kettlebells and rings</li>
+                  <li>Book up to 7 days ahead; cancel 4 hours before to keep the session (proposed)</li>
+                </ul>
+                <p class="xp__meta">Included in FORGE Performance and FORGE Elite.</p>
+                <a class="textlink" href="#inquiry" data-plan-link="performance"><span>Enquire about Performance</span><i class="btn__arrow" aria-hidden="true"></i></a>
+              </article>
+              <article class="xp__panel" role="tabpanel" id="xp-p4" aria-labelledby="xp-t4" tabindex="0">
+                <h3>Recovery &amp; changing</h3>
+                <p class="xp__lead">The work only counts if you can come back tomorrow. A quiet space to cool down properly.</p>
+                <ul class="xp__list-items">
+                  <li>Proposed mobility area with mats, foam rollers and bands</li>
+                  <li>Lockers, showers and changing rooms — bring your own padlock</li>
+                  <li>Your coach can add a mobility block to any plan</li>
+                </ul>
+                <p class="xp__meta">Included in every plan. No treatment or medical services are offered.</p>
+                <a class="textlink" href="#membership"><span>See what’s included</span><i class="btn__arrow" aria-hidden="true"></i></a>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <div class="distinct">
+          <p class="distinct__title label">What makes FORGE different</p>
+          <div class="distinct__grid">
+            <p data-fade><strong>Coached, not crowded.</strong> Group sessions run with capped class sizes, so a coach can actually see your lift (proposed).</p>
+            <p data-fade><strong>Progress on paper.</strong> Plans are written down and reviewed, so improvement is something you can see.</p>
+            <p data-fade><strong>No lock-in.</strong> Month-to-month, no joining fee, cancel any time (proposed policy).</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 MEMBERSHIP -->
+    <section class="member" id="membership" aria-labelledby="mem-title">
+      <div class="wrap">
+        <header class="member__head">
+          <p class="label index"><span>04</span> / Membership &amp; pricing</p>
+          <h2 class="h-l" id="mem-title"><span class="line"><span class="line__in" data-line>Choose how</span></span><br><span class="line"><span class="line__in" data-line>you <em>start.</em></span></span></h2>
+          <p class="member__note"><strong>Illustrative pricing.</strong> FORGE is a fictional concept — every price, allowance and policy below must be confirmed by the business before publication. Billed monthly in USD.</p>
+        </header>
+
+        <div class="plans" id="plans" aria-label="Membership plans"></div>
+        <noscript><p class="member__note">Plans need JavaScript to display: FORGE Access $49/month, FORGE Performance $79/month, FORGE Elite $129/month (illustrative pricing).</p></noscript>
+
+        <div class="selected" id="selected" aria-live="polite" hidden>
+          <p><span class="label">Selected plan</span> <strong id="selected-name"></strong> <span id="selected-price"></span></p>
+          <a class="btn btn--ember" href="#inquiry"><span>Continue to inquiry</span><i class="btn__arrow" aria-hidden="true"></i></a>
+        </div>
+
+        <div class="member__cols">
+          <div class="compare-wrap">
+            <h3 class="h-s">Compare plans</h3>
+            <div class="compare-scroll"><table class="compare" id="compare"><caption class="sr">Comparison of FORGE membership plans</caption></table></div>
+          </div>
+          <div class="extras-wrap">
+            <h3 class="h-s">Coaching &amp; add-ons</h3>
+            <ul class="extras" id="extras"></ul>
+            <p class="small">The introductory assessment is redeemable against your first month (proposed policy).</p>
+          </div>
+        </div>
+
+        <dl class="policies" id="policies"></dl>
+
+        <div class="faq" id="faq">
+          <header class="faq__head">
+            <p class="label index"><span>FAQ</span> / Before you join</p>
+            <h3 class="h-m">Straight<br>answers.</h3>
+            <p class="faq__lede">Still unsure? <a class="inline" href="#inquiry" data-topic="question">Ask a question</a> and we’ll reply.</p>
+          </header>
+          <div class="faq__list" id="faq-list">
+            <details class="qa"><summary><span>Which membership should I choose?</span><i aria-hidden="true"></i></summary><div class="qa__a"><p><strong>Access</strong> if you train independently. <strong>Performance</strong> if you want coached group conditioning and a plan review every three months. <strong>Elite</strong> if you want two personal-training sessions built into every month.</p></div></details>
+            <details class="qa"><summary><span>Is there a joining fee or minimum contract?</span><i aria-hidden="true"></i></summary><div class="qa__a"><p>No. The proposed policy is month-to-month with no joining fee. You pay the monthly price of your plan plus any add-ons you choose.</p></div></details>
+            <details class="qa"><summary><span>How do I cancel or change plans?</span><i aria-hidden="true"></i></summary><div class="qa__a"><p>Cancel any time; it takes effect at the end of your current billing month. Upgrades apply immediately, downgrades from your next billing date.</p></div></details>
+            <details class="qa"><summary><span>I’m new to training. Can I join?</span><i aria-hidden="true"></i></summary><div class="qa__a"><p>Yes. Every member starts with a 30-minute orientation, and we recommend the introductory assessment so a coach can set an honest starting point.</p></div></details>
+            <details class="qa"><summary><span>Is personal training included?</span><i aria-hidden="true"></i></summary><div class="qa__a"><p>Only in Elite (2 × 60 minutes per month, no rollover). On Access and Performance it’s available as a paid add-on — single sessions or packages of 4 or 8.</p></div></details>
+            <details class="qa"><summary><span>Can I visit before I commit?</span><i aria-hidden="true"></i></summary><div class="qa__a"><p>Yes — send an inquiry and choose “Book an introductory visit”. You can see the floor and meet a coach before choosing a plan.</p></div></details>
+            <details class="qa"><summary><span>Are these prices final?</span><i aria-hidden="true"></i></summary><div class="qa__a"><p>No. FORGE is a design concept and these prices are illustrative placeholders that a real business would need to confirm before publication.</p></div></details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 CAMPAIGN -->
+    <section class="campaign" id="campaign" aria-labelledby="camp-title">
+      <div class="campaign__pin">
+        <figure class="campaign__fig" data-campaign-fig>
+          <img src="assets/images/forge-campaign.jpg" data-fallback="assets/images/placeholders/forge-campaign.svg" alt="A lone athlete seen from behind in silhouette, standing over a barbell before a tall glowing factory window." width="1536" height="1024" loading="lazy">
+        </figure>
+        <div class="campaign__shade" aria-hidden="true"></div>
+        <p class="campaign__pre" aria-hidden="true"><span data-camp="pre">Show up.</span><span data-camp="pre">Do the work.</span></p>
+        <h2 class="campaign__title" id="camp-title">
+          <span class="line"><span class="line__in" data-camp="line">Forge</span></span>
+          <span class="line"><span class="line__in" data-camp="line">your</span></span>
+          <span class="line"><span class="line__in" data-camp="line">legacy.</span></span>
+        </h2>
+        <p class="campaign__cap label" data-camp="cap">FORGE — Built by you.</p>
+        <div class="campaign__progress" aria-hidden="true"><i></i></div>
+      </div>
+    </section>
+
+    <!-- 06 JOIN -->
+    <section class="join" id="join" aria-labelledby="join-title">
+      <div class="wrap join__grid">
+        <div class="join__copy">
+          <p class="label index"><span>06</span> / Join FORGE</p>
+          <h2 class="h-xl" id="join-title">
+            <span class="line"><span class="line__in" data-line>Your next chapter</span></span>
+            <span class="line"><span class="line__in" data-line>starts with</span></span>
+            <span class="line"><span class="line__in" data-line>the <em>work.</em></span></span>
+          </h2>
+          <p class="join__lead" data-fade>Pick a plan, send an inquiry, visit the floor, start training. No joining fee and no lock-in under the proposed terms.</p>
+          <ol class="steps" data-fade>
+            <li><span>01</span>Choose a membership</li>
+            <li><span>02</span>Send an inquiry</li>
+            <li><span>03</span>Visit and meet a coach</li>
+            <li><span>04</span>Orientation, then train</li>
+          </ol>
+          <div class="join__cta" data-fade>
+            <a class="btn btn--ember btn--lg" href="#membership" data-magnetic><span>Choose your membership</span><i class="btn__arrow" aria-hidden="true"></i></a>
+            <a class="textlink" href="#inquiry" data-topic="question"><span>Ask a question</span><i class="btn__arrow" aria-hidden="true"></i></a>
+          </div>
+        </div>
+
+        <div class="inquiry" id="inquiry-wrap">
+          <form class="form" id="inquiry" novalidate>
+            <h3 class="form__title">Inquire</h3>
+            <p class="form__lead">Front-end demonstration — <strong>nothing is sent</strong> until a submission service is connected (<code>formEndpoint</code> in <code>js/data.js</code>).</p>
+
+            <div class="field">
+              <label for="f-topic">I want to</label>
+              <select id="f-topic" name="topic">
+                <option value="join">Join FORGE</option>
+                <option value="question">Ask a question</option>
+                <option value="visit">Book an introductory visit</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-plan">Membership of interest</label>
+              <select id="f-plan" name="plan"></select>
+            </div>
+            <div class="field">
+              <label for="f-name">Full name <span aria-hidden="true">*</span></label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="e-name">
+              <span class="field__err" id="e-name" data-err></span>
+            </div>
+            <div class="field">
+              <label for="f-email">Email <span aria-hidden="true">*</span></label>
+              <input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="e-email">
+              <span class="field__err" id="e-email" data-err></span>
+            </div>
+            <div class="field">
+              <label for="f-phone">Phone <span class="opt">(optional)</span></label>
+              <input id="f-phone" name="phone" type="tel" autocomplete="tel" aria-describedby="e-phone">
+              <span class="field__err" id="e-phone" data-err></span>
+            </div>
+            <div class="field">
+              <label for="f-exp">Training experience</label>
+              <select id="f-exp" name="experience">
+                <option>New to training</option>
+                <option>Some experience</option>
+                <option>Experienced</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-msg">Message <span class="opt" id="msg-opt">(optional)</span></label>
+              <textarea id="f-msg" name="message" rows="3" aria-describedby="e-msg"></textarea>
+              <span class="field__err" id="e-msg" data-err></span>
+            </div>
+            <div class="field field--check">
+              <input id="f-consent" name="consent" type="checkbox" required aria-describedby="e-consent">
+              <label for="f-consent">I understand this is a concept demonstration and agree to be contacted about it. <span aria-hidden="true">*</span></label>
+              <span class="field__err" id="e-consent" data-err></span>
+            </div>
+            <button class="btn btn--ember btn--block" type="submit"><span>Send inquiry</span><i class="btn__arrow" aria-hidden="true"></i></button>
+            <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
+          </form>
+
+          <div class="confirm" id="confirm" tabindex="-1" hidden>
+            <p class="label confirm__tag">Inquiry received (demo)</p>
+            <h3>Thank you, <span id="c-name"></span>.</h3>
+            <p id="c-summary"></p>
+            <p><strong>In a real FORGE:</strong> we’d reply within one business day to confirm your plan and offer visit times. Here nothing was sent or stored.</p>
+            <button class="btn btn--line" type="button" id="confirm-reset"><span>Start another inquiry</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__grid">
+      <p class="footer__big" aria-hidden="true"><span>F</span><span>O</span><span>R</span><span>G</span><span>E</span></p>
+      <div class="footer__col footer__about">
+        <p>Strength is earned. FORGE is a fictional strength &amp; performance club created as a design and development concept. No real facility, prices or services exist.</p>
+      </div>
+      <nav class="footer__col" aria-label="Footer">
+        <p class="label">Navigate</p>
+        <a href="#philosophy">Philosophy</a>
+        <a href="#training">Training</a>
+        <a href="#membership">Membership</a>
+        <a href="#faq">FAQ</a>
+        <a href="#join">Inquire</a>
+      </nav>
+      <div class="footer__col footer__contact">
+        <p class="label">Contact — fictional</p>
+        <address class="muted footer__address">
+          12 Foundry Lane<br>
+          Riverside District, Springfield<br>
+          Mon–Fri 06:00–22:00 · Sat–Sun 08:00–20:00<br>
+          <a href="mailto:hello@forge-club.example">hello@forge-club.example</a><br>
+          <a href="tel:+15555550142">+1 (555) 555-0142</a>
+        </address>
+        <p class="muted small">Sample details for the concept — not a real address, email or phone number. Privacy policy &amp; terms to be added before publication.</p>
+      </div>
+      <div class="footer__base label">
+        <span>© 2026 FORGE concept. All content fictional. Prices illustrative.</span>
+        <a href="#top" id="to-top">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="js/data.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/animations.js" defer></script>
+</body>
+</html>
