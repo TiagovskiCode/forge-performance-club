@@ -1,5 +1,7 @@
 # FORGE — Built by You
 
+> Cinematic one-page website for a fictional premium strength & performance club — built with HTML, CSS, vanilla JS and GSAP.
+
 A **fictional** premium strength & performance club: a design and development concept built with
 plain HTML5, CSS3, vanilla JavaScript, GSAP 3.12.5 and ScrollTrigger (cdnjs). No framework, no build step.
 
